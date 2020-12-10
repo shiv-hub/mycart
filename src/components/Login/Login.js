@@ -7,6 +7,8 @@ import "./Login.css";
 
 import axios from "axios";
 
+
+
 const Login = () => {
 
 const [email, setEmail] = useState("");
@@ -15,7 +17,9 @@ const [user, setUser] = useState({});
 const [errorStatus, setErrorStatus] = useState(true)
 
 useEffect(() => {
- localStorage.setItem("email",user.email);
+ localStorage.setItem("token",user.token);
+ if(user.token)
+window.location="/home";
 }, [user])
 
 async function getUsersData(){
@@ -60,8 +64,6 @@ const inputOneEvent=(event)=>{
 const inputTwoEvent=(event)=>{
   setPwd(event.target.value);
 }
-
-
 
     return (
         <>
