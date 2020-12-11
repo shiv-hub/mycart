@@ -21,9 +21,11 @@ const [errorValidatePwd, setErrorValidatePwd] = useState(false);
 
 
 useEffect(() => {
+ if(user.token){
  localStorage.setItem("token",user.token);
- if(user.token)
-window.location="/home";
+  window.location="/home";
+ }
+
 }, [user])
 
 async function getUsersData(){
@@ -40,9 +42,10 @@ async function getUsersData(){
               console.log(response.status);
               setUser(response.data);
               console.log(user);
+              console.log("working");
       
   } catch (error) {
-    setErrorStatus(false);
+    // setErrorStatus(false);
     console.log(error.message);
   }
   
@@ -61,8 +64,11 @@ const validate=()=>{
       setEmail("");
     }
      else if(pwd.length<4){
-      setPwdError("password should");
+      setPwdError("password should be greater than 3");
       setPwd("");
+    }
+    else{
+      return true;
     }
 
     
@@ -74,7 +80,7 @@ const formHandler=async (event)=>{
         console.log("Password : ",pwd);
 
         if(validate())
-      getUsersData();
+        getUsersData();
       
         
 }

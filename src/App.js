@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Switch>
        <Route path="/" exact component={Login}/>
-      {localStorage.getItem("token")?<Route path="/home" exact component={Home}/>:<Redirect to="/"/>}
+      {(localStorage.getItem("token"))?<Route path="/home" exact component={Home}/>:<Redirect to={"/"}/>}
       </Switch>
     </div>
     </Router>
