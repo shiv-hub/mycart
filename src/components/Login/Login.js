@@ -35,7 +35,7 @@ async function getUsersData(){
 });
   try {
      const response=await axios.post(
-              'http://localhost:8090/api/authenticate',
+              'http://localhost:8090/ur/authenticate',
               data,{headers:{"Content-Type" : "application/json"}});
 
               console.log(response.data);
@@ -45,7 +45,7 @@ async function getUsersData(){
               console.log("working");
       
   } catch (error) {
-    // setErrorStatus(false);
+    setErrorStatus(false);
     console.log(error.message);
   }
   
@@ -56,7 +56,7 @@ const validate=()=>{
     if(!email.includes("@") && pwd.length<4){
       setEmailError("Invalid username")
       setEmail("");
-      setPwdError("password should");
+      setPwdError("password should be greater than 3");
       setPwd("");
     }
      else if(!email.includes("@")){
@@ -109,10 +109,11 @@ const inputTwoEvent=(event)=>{
 
 {/* form */}
 
-    <h1>{user.email}</h1>
 
 <div hidden={errorStatus} >
   <h4>Inavalid Credentials</h4>
+
+  
 </div>
 <div className="cardContainer">
     <div>
@@ -123,7 +124,8 @@ const inputTwoEvent=(event)=>{
   onSubmit={formHandler}
    autoComplete="off">
 
-  <CardContent>            
+<div className="form-container">
+  <CardContent >            
   <TextField
           id="standard-password-input"
           label="Email"
@@ -149,18 +151,52 @@ const inputTwoEvent=(event)=>{
       
 
       </CardContent>
-      <CardActions>
+      <CardActions className="logInButton">
         <Button 
         type="submit"
+        size="large"
         variant="contained" color="primary"
         >Log In</Button>
-        
-        <Button variant="outlined" color="secondary">Forget password?</Button>
       </CardActions>
+       <Button size="small" color="secondary">Forget password?</Button>
+         </div>
       </form>
+    
     </Card>
 </div>
 </div>
+
+<div className="roleCardContainer">
+
+<Card >
+      <CardActions>
+        <Button variant="contained" color="primary">
+          Super User 
+        </Button>
+
+        <Button variant="contained" color="primary">
+         Store Manager
+        </Button>
+
+        <Button variant="contained" color="primary">
+         Store Owner
+        </Button>
+        
+         
+
+        <Button variant="contained" size="large" color="primary">
+          Supplier
+        </Button>
+
+        <Button variant="contained" size="large" color="primary">
+            Customer
+        </Button>
+      </CardActions>
+    </Card>
+</div>
+
+
+
         </>
     )
 }
